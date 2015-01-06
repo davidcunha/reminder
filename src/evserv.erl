@@ -75,7 +75,7 @@ loop(S = #state{}) ->
             ?MODULE:loop(S);
         Unknown ->
             io:format("Unknown message: ~p~n",[Unknown]),
-            loop(State)
+            loop(S)
     end.
 
 send_to_clients(Msg, ClientDict) ->

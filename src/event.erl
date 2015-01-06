@@ -10,6 +10,12 @@ start(EventName, DateTime) ->
 start_link(EventName, DateTime) ->
     spawn_link(?MODULE, init, [self(), EventName, DateTime]).
 
+time_to_go(TimeOut={{_,_,_}, {_,_,_}}) ->
+    Now = calendar:local_time(),
+    ToGo = calendar:datetime_to_gregorian_seconds(TimeOut) -
+           calendar:datetime_to_gregorian_seconds(Now),
+    ToGo.
+
 init(Server, EventName, DateTime) ->
     loop(#state{server=Server,
                 name=EventName,
@@ -34,12 +40,3 @@ cancel(Pid) ->
         {'DOWN', Ref, process, Pid, _Reason} ->
             ok
     end.
-
-time_to_go(TimeOut={{_,_,_}, {_,_,_}}) ->
-    Now = calendar:local_time(),
-    ToGo = calendar:datetime_to_gregorian_seconds(TimeOut) -
-           calendar:datetime_to_gregorian_seconds(Now),
-    Secs = if ToGo > 0  -> ToGo;
-￼             ToGo =< 0 -> 0
-    end,
-    normalize(Secs).
