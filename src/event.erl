@@ -7,6 +7,9 @@
 start(EventName, DateTime) ->
     spawn(?MODULE, init, [self(), EventName, DateTime]).
 
+start_link(EventName, DateTime) ->
+    spawn_link(?MODULE, init, [self(), EventName, DateTime]).
+
 init(Server, EventName, DateTime) ->
     loop(#state{server=Server,
                 name=EventName,
