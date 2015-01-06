@@ -1,4 +1,4 @@
--module(evserv).
+-module(reminder_evserv).
 -compile(export_all).
 
 -record(state, {events,    %% list of #event{} records

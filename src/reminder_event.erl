@@ -1,4 +1,4 @@
--module(event).
+-module(reminder_event).
 -compile(export_all).
 -record(state, {server,
                 name="",

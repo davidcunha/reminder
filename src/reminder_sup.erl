@@ -1,4 +1,4 @@
--module(sup).
+-module(reminder_sup).
 -export([start/2, start_link/2, init/1, loop/1]).
 
 start(Mod,Args) ->
